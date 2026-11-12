@@ -415,6 +415,53 @@ body.playing{overflow:hidden}
 .pool{display:grid;gap:6px;padding-top:6px;border-top:1px dashed var(--line)}
 .pool button{justify-content:flex-start;text-align:left;background:var(--surface-2)}
 
+/* ---------- UX de juegos v2 ---------- */
+.game.with-fb{padding-bottom:calc(190px + env(safe-area-inset-bottom,0px))}
+.g-head{display:grid;gap:8px}
+.g-step{font:700 .82rem var(--f-display);color:var(--muted);letter-spacing:.02em}
+.g-prog{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden}
+.g-prog i{display:block;height:100%;background:var(--corn);border-radius:999px;transition:width .4s ease}
+.q-card{background:var(--surface);border-radius:16px;padding:16px;box-shadow:var(--shadow);display:grid;gap:8px}
+.howto{margin:0;padding-left:22px;display:grid;gap:8px;font-size:.95rem}
+.howto li::marker{font-weight:800;color:var(--leaf-ink)}
+.g-fb{position:fixed;left:0;right:0;bottom:0;z-index:60;transform:translateY(110%);transition:transform .28s ease;
+  padding:16px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -8px 24px rgba(0,0,0,.18)}
+.g-fb.show{transform:none}
+.g-fb.ok{background:var(--leaf-soft);color:var(--ink)} .g-fb.bad{background:var(--bad-soft);color:var(--ink)} .g-fb.warn{background:var(--corn-soft);color:var(--ink)}
+.g-fb-t{font:800 1.15rem var(--f-display);display:block;margin-bottom:2px}
+.g-fb.ok .g-fb-t{color:var(--leaf-ink)} .g-fb.bad .g-fb-t{color:var(--bad)} .g-fb.warn .g-fb-t{color:var(--corn-ink)}
+.g-fb .g-fb-btn{width:100%;color:#fff;background:var(--leaf-fill)}
+.g-fb.bad .g-fb-btn{background:var(--bad);color:#fff}
+.g-fb.warn .g-fb-btn{background:var(--corn);color:#2b1a00}
+.riddle{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--leaf-fill);color:#fff;border-radius:16px;padding:14px}
+.riddle .r-ic{font-size:2rem}
+.riddle b{font:800 1.2rem var(--f-display);display:block}
+.riddle span{font-size:.84rem;opacity:.9}
+.worth{background:#FFD66B;color:#3a2600;border-radius:12px;padding:6px 10px;text-align:center;display:grid;font-size:.72rem;font-weight:700;line-height:1.1}
+.worth b{font:800 1.4rem/1 var(--f-display);color:#3a2600}
+.clues{display:grid;gap:8px}
+.clue{background:var(--surface);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);border-left:0;display:grid;gap:2px}
+.clue.new{animation:popin .4s ease}
+.clue-n{font:700 .72rem var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--corn-ink)}
+.clue p{font-size:1rem}
+.pick-wrap{display:grid;gap:8px;background:var(--surface-2);border-radius:16px;padding:14px}
+.pick-g{display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;color:var(--muted);margin-top:4px}
+.pick{grid-template-columns:repeat(2,minmax(0,1fr))}
+#pick2{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pick button{background:var(--surface)}
+.grade button small{font-size:.7rem;color:var(--muted)}
+.phases{display:flex;gap:6px;flex-wrap:wrap}
+.phases span{font-size:.75rem;font-weight:700;border-radius:999px;padding:5px 10px;background:var(--surface-2);color:var(--muted)}
+.phases span.on{background:var(--leaf-fill);color:#fff}
+.phases span.done{background:var(--leaf-soft);color:var(--leaf-ink)}
+.slots li button{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;font-weight:600;padding:10px 12px}
+.slots .n{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--leaf-fill);color:#fff;font:800 .8rem var(--f-display)}
+.slots li.empty{gap:10px;font-weight:600;font-size:.85rem}
+.slots li.empty .n{background:var(--surface-2);color:var(--muted)}
+.slots .m{font-weight:800;color:var(--muted)}
+.slots li.right .m{color:var(--ok)} .slots li.wrong .m{color:var(--bad)}
+.pool button{font-weight:600}
+
 @media (min-width:760px){
   .sim-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:start}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -747,8 +794,8 @@ body.playing{overflow:hidden}
 <section class="view stack-lg" id="practicar" data-view="practicar">
   <div class="modhead"><span class="eyebrow">Jugar</span><h1>Aprende jugando</h1><p class="muted">Elige un juego. Tu racha y tus récords se guardan en este teléfono.</p></div>
   <div class="nojs-only callout"><b class="t">Los juegos necesitan el navegador</b>Esta vista previa no ejecuta juegos. Abre la guía en Chrome o Safari: <span class="mono small">laurencem10.github.io/guia-predefensa-maiz</span>. Abajo tienes las tarjetas y el quiz en versión simple.</div>
-  <div class="g-stats js-only" id="g-stats"><div><b>0</b><span>días seguidos</span></div><div><b>0</b><span>puntos acumulados</span></div></div>
-  <div class="g-grid js-only" id="g-grid"><button class="g-card" data-game="jurado"><span class="g-ic" aria-hidden="true">🎤</span><b>El jurado pregunta</b><span class="s">Responder en voz alta bajo presión</span><span class="row" style="gap:6px;margin-top:4px"><span class="pill">5–10 min</span></span></button><button class="g-card" data-game="quien"><span class="g-ic" aria-hidden="true">🌽</span><b>¿Quién soy?</b><span class="s">Reconocer los 12 genotipos por sus datos</span><span class="row" style="gap:6px;margin-top:4px"><span class="pill">3 min</span></span></button><button class="g-card" data-game="mayor"><span class="g-ic" aria-hidden="true">⚖️</span><b>Más alto o más bajo</b><span class="s">Dominar los números de los cuadros</span><span class="row" style="gap:6px;margin-top:4px"><span class="pill">2 min</span></span></button><button class="g-card" data-game="ordena"><span class="g-ic" aria-hidden="true">🧩</span><b>Ordena la tesis</b><span class="s">Contar el método y la lógica en orden</span><span class="row" style="gap:6px;margin-top:4px"><span class="pill">3 min</span></span></button><button class="g-card" data-game="flash"><span class="g-ic" aria-hidden="true">🃏</span><b>Tarjetas de memoria</b><span class="s">28 números y datos clave</span><span class="row" style="gap:6px;margin-top:4px"><span class="pill">libre</span></span></button><button class="g-card" data-game="quiz"><span class="g-ic" aria-hidden="true">✅</span><b>Quiz</b><span class="s">15 preguntas de repaso general</span><span class="row" style="gap:6px;margin-top:4px"><span class="pill">5 min</span></span></button></div>
+  <div class="g-stats js-only" id="g-stats"><div><b>🔥 0</b><span>días seguidos</span></div><div><b>⭐ 0</b><span>puntos acumulados</span></div></div>
+  <div class="g-grid js-only" id="g-grid"><button class="g-card" data-game="jurado"><span class="g-ic" aria-hidden="true">🎤</span><b>El jurado pregunta</b><span class="s">Responder en voz alta bajo presión</span><span class="row" style="gap:6px;margin-top:auto;padding-top:6px"><span class="pill">⏱ 5–10 min</span></span></button><button class="g-card" data-game="quien"><span class="g-ic" aria-hidden="true">🌽</span><b>¿Quién soy?</b><span class="s">Reconocer los 12 genotipos por sus datos</span><span class="row" style="gap:6px;margin-top:auto;padding-top:6px"><span class="pill">⏱ 3 min</span></span></button><button class="g-card" data-game="mayor"><span class="g-ic" aria-hidden="true">⚖️</span><b>Más alto o más bajo</b><span class="s">Dominar los números de los cuadros</span><span class="row" style="gap:6px;margin-top:auto;padding-top:6px"><span class="pill">⏱ 2 min</span></span></button><button class="g-card" data-game="ordena"><span class="g-ic" aria-hidden="true">🧩</span><b>Ordena la tesis</b><span class="s">Contar el método y la lógica en orden</span><span class="row" style="gap:6px;margin-top:auto;padding-top:6px"><span class="pill">⏱ 3 min</span></span></button><button class="g-card" data-game="flash"><span class="g-ic" aria-hidden="true">🃏</span><b>Tarjetas de memoria</b><span class="s">28 números y datos clave</span><span class="row" style="gap:6px;margin-top:auto;padding-top:6px"><span class="pill">⏱ libre</span></span></button><button class="g-card" data-game="quiz"><span class="g-ic" aria-hidden="true">✅</span><b>Quiz</b><span class="s">15 preguntas de repaso general</span><span class="row" style="gap:6px;margin-top:auto;padding-top:6px"><span class="pill">⏱ 5 min</span></span></button></div>
   <div class="nojs-only stack"><h2>Tarjetas de memoria</h2><p class="muted small">Toca cada pregunta para ver la respuesta.</p><div class="stack" id="static-flash"><details class="sx"><summary>¿Cuántos genotipos y de qué tipo?</summary><div><span class="pill">Diseño</span><p style="margin-top:6px">12: 5 variedades mejoradas del INTA y 7 poblaciones nativas del Banco Nacional de Germoplasma.</p></div></details><details class="sx"><summary>¿Qué concentraciones de PEG 6&nbsp;000 y su potencial?</summary><div><span class="pill">Diseño</span><p style="margin-top:6px">0&nbsp;% (testigo, agua estéril, 0&nbsp;MPa), 5&nbsp;% (−0.3), 10&nbsp;% (−0.6), 15&nbsp;% (−0.9) y 20&nbsp;% (−1.2&nbsp;MPa).</p></div></details><details class="sx"><summary>¿Repeticiones y semillas?</summary><div><span class="pill">Diseño</span><p style="margin-top:6px">3 repeticiones de 25&nbsp;semillas por genotipo y concentración (4&nbsp;500&nbsp;semillas por experimento).</p></div></details><details class="sx"><summary>¿Qué diseño experimental?</summary><div><span class="pill">Diseño</span><p style="margin-top:6px">Diseño Completamente al Azar (DCA) con dos factores: concentración de PEG y genotipo.</p></div></details><details class="sx"><summary>¿Cuánta solución por pana?</summary><div><span class="pill">Método</span><p style="margin-top:6px">280&nbsp;ml de solución de PEG 6&nbsp;000 (Sigma Chemicals).</p></div></details><details class="sx"><summary>¿Condiciones del laboratorio?</summary><div><span class="pill">Método</span><p style="margin-top:6px">25&nbsp;°C y humedad relativa de 45 a 60&nbsp;%.</p></div></details><details class="sx"><summary>¿Cómo se desinfectó la semilla?</summary><div><span class="pill">Método</span><p style="margin-top:6px">Etanol al 70&nbsp;% y Phyton 24 SC al 0.3&nbsp;% por 5 minutos; 3 enjuagues con agua estéril. El área, con formalina al 5&nbsp;%.</p></div></details><details class="sx"><summary>¿Fungicida de la prueba de germinación?</summary><div><span class="pill">Método</span><p style="margin-top:6px">Vitavax 34 SC.</p></div></details><details class="sx"><summary>¿Dónde se hizo el estudio?</summary><div><span class="pill">Método</span><p style="margin-top:6px">BNG del INTA, CNIA, km 14 ½ carretera Norte, 2.5 km al Sur, Managua. 70 m s.n.m.</p></div></details><details class="sx"><summary>¿Con qué se midió la cobertura foliar?</summary><div><span class="pill">Método</span><p style="margin-top:6px">Con el programa Image Canopy versión 3.6 (Barreda et al., 2017).</p></div></details><details class="sx"><summary>¿Qué modelo para LP, LR y CF?</summary><div><span class="pill">Análisis</span><p style="margin-top:6px">Modelo lineal mixto: factores e interacción fijos, repetición aleatoria, varianzas heterogéneas con varIdent. Tukey con emmeans, α = 0.05, en R.</p></div></details><details class="sx"><summary>¿Y para el número de raíces?</summary><div><span class="pill">Análisis</span><p style="margin-top:6px">Modelo lineal generalizado Poisson truncado, ajustado por aproximación de Laplace.</p></div></details><details class="sx"><summary>¿Cómo se calcula el ITEG?</summary><div><span class="pill">Fórmula</span><p style="margin-top:6px">ITEG = (IVGE ÷ IVGC) × 100. IVG con estrés entre IVG del testigo.</p></div></details><details class="sx"><summary>¿Cómo se calcula el IVG?</summary><div><span class="pill">Fórmula</span><p style="margin-top:6px">IVG = ns2×1 + ns4×0.75 + ns6×0.5 + ns8×0.25 (Partheeban et al., 2017).</p></div></details><details class="sx"><summary>¿ITEG promedio al 5&nbsp;% y al 20&nbsp;%?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">85.4&nbsp;% al 5&nbsp;% y 26.6&nbsp;% al 20&nbsp;% (promedio de los 12, calculado del Cuadro 4).</p></div></details><details class="sx"><summary>¿Quiénes tuvieron el mayor ITEG al 20&nbsp;%?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">NB-6 con 45.15&nbsp;% y 0077 con 43.72&nbsp;%.</p></div></details><details class="sx"><summary>¿Mejor germinación en el testigo?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">0182 (81.33&nbsp;%) y 0097 (80&nbsp;%). Entre mejoradas, NB-6 (56&nbsp;%) e INTA Nutremas (42.67&nbsp;%).</p></div></details><details class="sx"><summary>¿Velocidad de NB-6 al 15 y 20&nbsp;%?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">41.33&nbsp;% y 32.22&nbsp;%: la más alta en estrés severo.</p></div></details><details class="sx"><summary>¿Longitud de raíz de 0097?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">21.39&nbsp;cm en el testigo y 17.48&nbsp;cm al 20&nbsp;%: la raíz más larga en todos los niveles.</p></div></details><details class="sx"><summary>¿Número de raíces de 0232 al 10, 15 y 20&nbsp;%?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">5.05, 5.20 y 5.90&nbsp;raíces.</p></div></details><details class="sx"><summary>¿Mayor longitud de planta en el testigo?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">0085 con 18.21&nbsp;cm.</p></div></details><details class="sx"><summary>¿Cobertura de 0232?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">26.93&nbsp;cm² en el testigo, 138.97&nbsp;cm² al 5&nbsp;% y 96.94&nbsp;cm² al 20&nbsp;%.</p></div></details><details class="sx"><summary>¿Cobertura de las mejoradas en el testigo?</summary><div><span class="pill">Resultado</span><p style="margin-top:6px">Entre 74.88 y 113.49&nbsp;cm²; luego cayó con el PEG.</p></div></details><details class="sx"><summary>¿Qué concentraciones recomiendan y por qué?</summary><div><span class="pill">Conclusión</span><p style="margin-top:6px">5&nbsp;% y 10&nbsp;%: diferencian genotipos sin impedir el crecimiento de la plántula.</p></div></details><details class="sx"><summary>¿Cuáles son los genotipos promisorios?</summary><div><span class="pill">Conclusión</span><p style="margin-top:6px">Las nativas 0232, 0097, 0077 y 0085 (y NB-6 entre las mejoradas).</p></div></details><details class="sx"><summary>¿De dónde viene cada nativa?</summary><div><span class="pill">Genotipos</span><p style="margin-top:6px">0077 Chontales (Maíz Breve) · 0085 Boaco (Pujagua) · 0097 Jinotega (Olotillo) · 0182 Granada (Criollo Olotillo Blanco) · 0232 Madriz (Amarillo Criollo) · 0336 León (Agapeño) · 0361 Boaco (Sangre de Toro).</p></div></details><details class="sx"><summary>¿Cuánto costaron los insumos?</summary><div><span class="pill">Extra</span><p style="margin-top:6px">C$ 29,284.32 (Anexo 1); el PEG 6&nbsp;000 fue el más caro: C$ 8,284.32 el frasco de 1 kg.</p></div></details><details class="sx"><summary>¿Cuántos bar es 1&nbsp;MPa?</summary><div><span class="pill">Extra</span><p style="margin-top:6px">10&nbsp;bar. Por eso −12&nbsp;bar = −1.2&nbsp;MPa.</p></div></details></div><h2 style="margin-top:10px">Quiz</h2><p class="muted small">Piensa tu respuesta y luego toca para ver la correcta.</p><div class="stack" id="static-quiz"><details class="sx"><summary>1. ¿Qué hace el PEG 6&nbsp;000 en la solución?</summary><div><ol type="a" class="small"><li>Aporta nutrientes a la semilla</li><li style="font-weight:700;color:var(--leaf-ink)">Reduce el potencial hídrico y limita la absorción de agua ✓</li><li>Elimina hongos de la semilla</li><li>Aumenta el oxígeno disponible</li></ol><p class="small muted">Es un polímero inerte que baja el potencial hídrico: simula sequía sin ser tóxico.</p></div></details><details class="sx"><summary>2. ¿Qué potencial osmótico asigna la tesis al 20&nbsp;% de PEG?</summary><div><ol type="a" class="small"><li>−0.3&nbsp;MPa</li><li>−0.6&nbsp;MPa</li><li>−0.9&nbsp;MPa</li><li style="font-weight:700;color:var(--leaf-ink)">−1.2&nbsp;MPa ✓</li></ol><p class="small muted">5&nbsp;% = −0.3, 10&nbsp;% = −0.6, 15&nbsp;% = −0.9 y 20&nbsp;% = −1.2&nbsp;MPa.</p></div></details><details class="sx"><summary>3. Un ITEG de 100&nbsp;% significa que…</summary><div><ol type="a" class="small"><li>No germinó ninguna semilla</li><li style="font-weight:700;color:var(--leaf-ink)">Germinó igual de rápido que su testigo ✓</li><li>Germinó el 100&nbsp;% de las semillas</li><li>Es el máximo posible</li></ol><p class="small muted">Es la razón entre el IVG con estrés y el del testigo. Puede pasar de 100&nbsp;% (Nutrinta Amarillo al 5&nbsp;%: 111.76&nbsp;%).</p></div></details><details class="sx"><summary>4. ¿Qué genotipo tuvo el ITEG más alto al 20&nbsp;%?</summary><div><ol type="a" class="small"><li>0077</li><li>0232</li><li style="font-weight:700;color:var(--leaf-ink)">NB-6 ✓</li><li>0097</li></ol><p class="small muted">NB-6 con 45.15&nbsp;%, seguido de 0077 con 43.72&nbsp;%.</p></div></details><details class="sx"><summary>5. ¿Qué genotipo mantuvo la raíz más larga en todos los niveles?</summary><div><ol type="a" class="small"><li style="font-weight:700;color:var(--leaf-ink)">0097 ✓</li><li>0085</li><li>Fortinica</li><li>0336</li></ol><p class="small muted">0097 (Olotillo, Jinotega): 21.39&nbsp;cm en el testigo y 17.48&nbsp;cm al 20&nbsp;%.</p></div></details><details class="sx"><summary>6. ¿Qué genotipo formó más raíces en todas las concentraciones?</summary><div><ol type="a" class="small"><li>0182</li><li style="font-weight:700;color:var(--leaf-ink)">0232 ✓</li><li>NB-6</li><li>0361</li></ol><p class="small muted">0232 (Maíz Amarillo Criollo, Madriz): 5.05, 5.20 y 5.90 al 10, 15 y 20&nbsp;%.</p></div></details><details class="sx"><summary>7. ¿Qué concentraciones recomienda la tesis para la selección temprana?</summary><div><ol type="a" class="small"><li>0 y 5&nbsp;%</li><li style="font-weight:700;color:var(--leaf-ink)">5 y 10&nbsp;% ✓</li><li>15 y 20&nbsp;%</li><li>Solo 20&nbsp;%</li></ol><p class="small muted">Diferencian genotipos sin impedir el crecimiento necesario para medir la plántula.</p></div></details><details class="sx"><summary>8. Si dos genotipos comparten una letra de Tukey en la misma concentración…</summary><div><ol type="a" class="small"><li>Difieren significativamente</li><li style="font-weight:700;color:var(--leaf-ink)">No difieren significativamente ✓</li><li>Tienen el mismo valor exacto</li><li>Uno es nativo y otro mejorado</li></ol><p class="small muted">Compartir al menos una letra indica que la diferencia no es significativa (α = 0.05).</p></div></details><details class="sx"><summary>9. ¿Qué modelo se usó para el número de raíces?</summary><div><ol type="a" class="small"><li>ANDEVA clásico</li><li>Regresión lineal</li><li style="font-weight:700;color:var(--leaf-ink)">Modelo lineal generalizado Poisson truncado ✓</li><li>Prueba de chi cuadrado</li></ol><p class="small muted">Es un conteo, por eso Poisson; ajustado por aproximación de Laplace.</p></div></details><details class="sx"><summary>10. ¿Qué significa que la interacción concentración × genotipo sea significativa?</summary><div><ol type="a" class="small"><li>Que el PEG no tuvo efecto</li><li>Que todos los genotipos respondieron igual</li><li style="font-weight:700;color:var(--leaf-ink)">Que el efecto del PEG depende del genotipo ✓</li><li>Que hubo error experimental</li></ol><p class="small muted">En longitud de planta y de raíz fue p &lt; 0.0001: no todos responden igual al estrés.</p></div></details><details class="sx"><summary>11. En cobertura foliar, ¿qué pasó con las mejoradas?</summary><div><ol type="a" class="small"><li>Siempre fueron superiores</li><li style="font-weight:700;color:var(--leaf-ink)">Superiores solo sin estrés, luego cayeron ✓</li><li>Nunca germinaron</li><li>Igualaron a las nativas</li></ol><p class="small muted">En el testigo tuvieron 74.88–113.49&nbsp;cm²; bajo PEG las nativas fueron más estables.</p></div></details><details class="sx"><summary>12. ¿Cuántas semillas por repetición?</summary><div><ol type="a" class="small"><li>10</li><li>20</li><li style="font-weight:700;color:var(--leaf-ink)">25 ✓</li><li>50</li></ol><p class="small muted">25&nbsp;semillas por genotipo en cada repetición; 3 repeticiones.</p></div></details><details class="sx"><summary>13. ¿Por qué el PEG no equivale totalmente a la sequía de campo?</summary><div><ol type="a" class="small"><li>Porque es tóxico</li><li style="font-weight:700;color:var(--leaf-ink)">Porque solo crea estrés osmótico y no reproduce el suelo; además puede bajar el oxígeno ✓</li><li>Porque aumenta la temperatura</li><li>Porque solo funciona en sorgo</li></ol><p class="small muted">Kylyshbayeva et al. (2024) y Guo et al. (2017). Por eso recomiendan validar en campo.</p></div></details><details class="sx"><summary>14. ¿Cuál es la ventana más sensible del maíz a la sequía?</summary><div><ol type="a" class="small"><li>La siembra</li><li style="font-weight:700;color:var(--leaf-ink)">1 semana antes a 2 semanas después de la antesis ✓</li><li>El llenado de grano tardío</li><li>La madurez fisiológica</li></ol><p class="small muted">Ahí el déficit causa aborto de óvulos y fallas de polinización (Sánchez et al., 2020).</p></div></details><details class="sx"><summary>15. ¿Cuál fue la mayor longitud de planta en el testigo?</summary><div><ol type="a" class="small"><li>0232 · 16.93&nbsp;cm</li><li style="font-weight:700;color:var(--leaf-ink)">0085 · 18.21&nbsp;cm ✓</li><li>NB-6 · 12.81&nbsp;cm</li><li>0097 · 17.61&nbsp;cm</li></ol><p class="small muted">0085 (Maíz Pujagua, Boaco) alcanzó 18.21&nbsp;cm.</p></div></details></div></div>
     <div id="g-park" hidden=""><div id="pr-flash" class="stack">
     <div class="row" style="justify-content:space-between"><span class="pill" id="fcount">0 de 28 sabidas</span><label class="row small" style="gap:6px"><input type="checkbox" id="fonly"> Solo las que me faltan</label></div>
@@ -809,7 +856,7 @@ body.playing{overflow:hidden}
   </div>
 </section></main>
 
-<div class="game" id="game" hidden="" role="dialog" aria-modal="true" aria-labelledby="g-title"><div class="g-top"><button id="g-close" aria-label="Salir del juego">✕</button><b id="g-title"></b><span class="pill" id="g-score"></span></div><div class="wrap g-body" id="g-body"></div></div>
+<div class="game" id="game" hidden="" role="dialog" aria-modal="true" aria-labelledby="g-title"><div class="g-top"><button id="g-close" aria-label="Salir del juego">✕</button><b id="g-title"></b><span class="pill" id="g-score"></span></div><div class="wrap g-body" id="g-body"></div><div class="g-fb" id="g-fb" aria-live="polite"></div></div>
 <div class="scrim" id="scrim"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheettitle"><div class="wrap stack" id="sheetbody"></div></div>
 
@@ -1269,7 +1316,7 @@ function renderQ() {
   if (qi >= QUIZ.length) {
     const best = Math.max(qscore, store.get("best", 0)); store.set("best", best);
     $("#qcard").innerHTML = `<span class="eyebrow">Resultado</span><h2>${qscore} de ${QUIZ.length}</h2><p>${qscore >= 13 ? "Excelente: dominas los datos." : qscore >= 9 ? "Bien. Repasa las que fallaste en los módulos." : "Vuelve a los módulos 4 y 5 y repite."}</p><p class="small muted">Mejor puntaje en este teléfono: ${best}</p><button class="btn primary" id="qagain">Repetir quiz</button>`;
-    store.set("total", store.get("total", 0) + qscore); touchStreak();
+    store.set("total", store.get("total", 0) + qscore); touchStreak(); if (typeof G !== "undefined") G.playing = false;
     $("#qagain").addEventListener("click", startQuiz); return;
   }
   const [q, opts, a, exp] = QUIZ[qi];
@@ -1338,7 +1385,6 @@ INIT.jurado = () => {
 /* =====================================================================
    JUEGOS
    ===================================================================== */
-const PLAYERS = ["Laura", "Isidro"];
 const shuffle = a => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
 const todayKey = (d = new Date()) => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 function touchStreak() {
@@ -1347,13 +1393,25 @@ function touchStreak() {
   const y = new Date(); y.setDate(y.getDate() - 1);
   st.n = st.last === todayKey(y) ? st.n + 1 : 1; st.last = t; store.set("streak", st); return st;
 }
-const G = { cur: null, score: 0, timers: [] };
-const later = (fn, ms) => { const id = setTimeout(fn, ms); G.timers.push(id); return id; };
+const G = { cur: null, score: 0, timers: [], playing: false };
 const every = (fn, ms) => { const id = setInterval(fn, ms); G.timers.push(id); return id; };
 const clearTimers = () => { G.timers.forEach(id => { clearTimeout(id); clearInterval(id); }); G.timers = []; };
 const body = () => $("#g-body");
-function setScore(v, label) { G.score = v; $("#g-score").textContent = label || (v + " pts"); }
+function setScore(v) { G.score = v; $("#g-score").textContent = "⭐ " + v; }
 function pop(el) { if (reduced || !el) return; el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); }
+const progress = (i, n, label, right = "") => `<div class="g-head"><div class="row" style="justify-content:space-between"><span class="g-step">${label}</span>${right}</div><div class="g-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${i}"><i style="width:${Math.max(4, i / n * 100)}%"></i></div></div>`;
+
+/* barra de resultado inferior */
+function feedback({ ok = true, title, text = "", btn = "Continuar", onNext, tone }) {
+  const fb = $("#g-fb");
+  fb.className = "g-fb show " + (tone || (ok ? "ok" : "bad"));
+  fb.innerHTML = `<div class="wrap stack" style="gap:10px"><div><b class="g-fb-t">${title}</b>${text ? `<p class="small">${text}</p>` : ""}</div><button class="btn big g-fb-btn" id="g-fb-next">${btn}</button></div>`;
+  fixNb(fb);
+  $("#game").classList.add("with-fb");
+  $("#g-fb-next").addEventListener("click", () => { hideFb(); onNext && onNext(); });
+  $("#g-fb-next").focus({ preventScroll: true });
+}
+function hideFb() { const fb = $("#g-fb"); fb.className = "g-fb"; fb.innerHTML = ""; $("#game").classList.remove("with-fb"); }
 
 const GAMES = {
   jurado: { name: "El jurado pregunta", icon: "🎤", what: "Responder en voz alta bajo presión", time: "5–10 min", start: startJurado },
@@ -1366,51 +1424,58 @@ const GAMES = {
 
 function renderHub() {
   const st = store.get("streak", { last: null, n: 0 });
-  const active = st.last === todayKey() || (() => { const y = new Date(); y.setDate(y.getDate() - 1); return st.last === todayKey(y); })();
-  $("#g-stats").innerHTML = `<div><b>${active ? st.n : 0}</b><span>día${(active ? st.n : 0) === 1 ? "" : "s"} seguidos</span></div><div><b>${store.get("total", 0)}</b><span>puntos acumulados</span></div>`;
+  const y = new Date(); y.setDate(y.getDate() - 1);
+  const n = st.last === todayKey() || st.last === todayKey(y) ? st.n : 0;
+  $("#g-stats").innerHTML = `<div><b>🔥 ${n}</b><span>día${n === 1 ? "" : "s"} seguidos</span></div><div><b>⭐ ${store.get("total", 0)}</b><span>puntos acumulados</span></div>`;
   $("#g-grid").innerHTML = Object.entries(GAMES).map(([id, g]) => {
     const best = store.get("best:" + id, null);
-    return `<button class="g-card" data-game="${id}"><span class="g-ic" aria-hidden="true">${g.icon}</span><b>${g.name}</b><span class="s">${g.what}</span><span class="row" style="gap:6px;margin-top:4px"><span class="pill">${g.time}</span>${g.duel ? '<span class="pill duel">Duelo</span>' : ""}${best != null ? `<span class="pill best">Récord ${best}</span>` : ""}</span></button>`;
+    return `<button class="g-card" data-game="${id}"><span class="g-ic" aria-hidden="true">${g.icon}</span><b>${g.name}</b><span class="s">${g.what}</span><span class="row" style="gap:6px;margin-top:auto;padding-top:6px"><span class="pill">⏱ ${g.time}</span>${best != null ? `<span class="pill best">Récord ${best}</span>` : ""}</span></button>`;
   }).join("");
 }
 function openGame(id) {
-  clearTimers(); G.cur = id; G.score = 0;
+  clearTimers(); hideFb(); G.cur = id; G.score = 0; G.playing = false;
   $("#g-title").textContent = GAMES[id].name; setScore(0);
   $("#game").hidden = false; document.body.classList.add("playing");
   body().innerHTML = ""; $("#game").scrollTop = 0;
   GAMES[id].start(body());
 }
 function closeGame() {
-  clearTimers();
+  clearTimers(); hideFb();
   const park = $("#g-park");
   ["#pr-flash", "#pr-quiz"].forEach(s => { const el = $(s); if (el && el.parentElement !== park) park.appendChild(el); });
-  $("#game").hidden = true; document.body.classList.remove("playing"); G.cur = null; renderHub();
+  $("#game").hidden = true; document.body.classList.remove("playing"); G.cur = null; G.playing = false; renderHub();
 }
-function chooseMode(el, id, onStart, extra = "") {
+function askExit() {
+  if (!G.playing) return closeGame();
+  feedback({ tone: "warn", title: "¿Salir del juego?", text: "Se pierde el avance de esta partida.", btn: "Sí, salir", onNext: closeGame });
+  const fb = $("#g-fb .wrap");
+  fb.insertAdjacentHTML("beforeend", `<button class="btn big ghost" id="g-stay">Seguir jugando</button>`);
+  $("#g-stay").addEventListener("click", hideFb);
+}
+function intro(el, id, steps, onStart, extra = "") {
   const g = GAMES[id];
-  el.innerHTML = `<div class="g-intro stack"><span class="g-big" aria-hidden="true">${g.icon}</span><h2>${g.name}</h2>${extra}
-    <div class="stack"><button class="btn primary big" data-mode="solo">Jugar</button>${g.duel ? `<button class="btn big duelbtn" data-mode="duel">Duelo · ${PLAYERS[0]} vs ${PLAYERS[1]}</button>` : ""}</div></div>`;
-  el.querySelectorAll("[data-mode]").forEach(b => b.addEventListener("click", () => onStart(b.dataset.mode === "duel")));
+  el.innerHTML = `<div class="g-intro stack"><span class="g-big" aria-hidden="true">${g.icon}</span><h2>${g.name}</h2>
+    <div class="card stack" style="text-align:left"><span class="eyebrow">Cómo se juega</span><ol class="howto">${steps.map(s => `<li>${s}</li>`).join("")}</ol></div>${extra}
+    <button class="btn primary big" id="g-go">Empezar</button></div>`;
+  fixNb(el);
+  $("#g-go").addEventListener("click", () => { G.playing = true; onStart(); $("#game").scrollTop = 0; });
 }
-function finish(id, score, html, { max = null, review = null, duel = false } = {}) {
-  clearTimers();
-  const prev = duel ? null : store.get("best:" + id, null), best = Math.max(score, prev ?? 0);
-  if (!duel) store.set("best:" + id, best); store.set("total", store.get("total", 0) + Math.max(0, score));
+function finish(id, score, html, { max = null, review = null } = {}) {
+  clearTimers(); hideFb(); G.playing = false;
+  const prev = store.get("best:" + id, null), best = Math.max(score, prev ?? 0);
+  store.set("best:" + id, best); store.set("total", store.get("total", 0) + Math.max(0, score));
   const st = touchStreak();
-  const isRecord = !duel && (prev == null || score > prev);
-  body().innerHTML = `<div class="g-intro stack"><span class="g-big" aria-hidden="true">${duel || (isRecord && score > 0) ? "🏆" : "🌱"}</span>
-    <h2>${duel ? "Duelo terminado" : score + (max ? " de " + max : "") + " puntos"}</h2>${duel ? "" : isRecord && score > 0 ? '<p class="g-record">¡Nuevo récord!</p>' : `<p class="muted">Récord: ${best}</p>`}
-    ${html || ""}<p class="small muted">Racha: ${st.n} día${st.n === 1 ? "" : "s"} seguidos estudiando.</p>
-    ${review ? `<a class="btn ghost" href="${review[0]}" data-close>${review[1]}</a>` : ""}
-    <div class="stack"><button class="btn primary big" id="g-again">Jugar de nuevo</button><button class="btn big" data-close>Volver a juegos</button></div></div>`;
+  const isRecord = (prev == null || score > prev) && score > 0;
+  body().innerHTML = `<div class="g-intro stack"><span class="g-big" aria-hidden="true">${isRecord ? "🏆" : "🌱"}</span>
+    <h2>${score}${max ? " de " + max : ""} ${max || score !== 1 ? "puntos" : "punto"}</h2>${isRecord ? '<p class="g-record">¡Nuevo récord!</p>' : `<p class="muted">Tu récord: ${best}</p>`}
+    ${html || ""}<p class="small muted">🔥 Racha: ${st.n} día${st.n === 1 ? "" : "s"} seguidos estudiando.</p>
+    <button class="btn primary big" id="g-again">Jugar de nuevo</button>
+    ${review ? `<a class="btn big" href="${review[0]}" data-close>${review[1]}</a>` : ""}
+    <button class="btn big ghost" data-close>Volver a juegos</button></div>`;
   $("#g-again").addEventListener("click", () => openGame(id));
   pop($(".g-big", body()));
+  $("#game").scrollTop = 0;
 }
-function duelResult(sc) {
-  const w = sc[0] === sc[1] ? null : sc[0] > sc[1] ? 0 : 1;
-  return `<div class="duel-score"><div class="${w === 0 ? "win" : ""}"><b>${sc[0]}</b>${PLAYERS[0]}</div><div class="${w === 1 ? "win" : ""}"><b>${sc[1]}</b>${PLAYERS[1]}</div></div><p><b>${w == null ? "¡Empate!" : "¡Gana " + PLAYERS[w] + "!"}</b></p>`;
-}
-function turnBadge(p) { return `<div class="turn p${p}">Turno de <b>${PLAYERS[p]}</b></div>`; }
 
 /* ---------- 1. El jurado pregunta ---------- */
 const FOLLOW = [
@@ -1434,48 +1499,55 @@ const FOLLOW = [
   "¿Cómo llegarían estos resultados al productor?"
 ];
 function startJurado(el) {
-  chooseMode(el, "jurado", () => runJurado(el, $("#jhard").checked),
-    `<p class="muted">Lee la pregunta, responde en voz alta antes de que acabe el minuto y compara con la respuesta modelo. Califícate con honestidad: las que no sepas volverán más seguido.</p>
-     <label class="check" style="box-shadow:none"><input type="checkbox" id="jhard"><span><p><b>Modo jurado duro</b></p><span class="small muted">Después de cada respuesta, el jurado insiste con una repregunta.</span></span></label>`);
+  intro(el, "jurado", [
+    "Te aparece una pregunta del jurado y un cronómetro de 60 segundos.",
+    "Respóndela <b>en voz alta</b>, como en la predefensa.",
+    "Toca “Ver respuesta modelo” y compárala con lo que dijiste.",
+    "Califícate con honestidad: las que no sepas volverán más seguido."
+  ], () => runJurado(el, $("#jhard").checked),
+  `<label class="check" style="text-align:left"><input type="checkbox" id="jhard"><span><p><b>Modo jurado duro</b></p><span class="small muted">Después de cada respuesta, el jurado insiste con una repregunta.</span></span></label>`);
 }
 function runJurado(el, hard) {
-  const lv = store.get("jlv", {});
-  const pool = QA.map((_, i) => i), picks = [];
+  const lv = store.get("jlv", {}), picks = [];
   while (picks.length < 6) {
-    const w = pool.filter(i => !picks.includes(i)).map(i => [i, lv[i] == null ? 3 : 4 - lv[i]]);
+    const w = QA.map((_, i) => i).filter(i => !picks.includes(i)).map(i => [i, lv[i] == null ? 3 : 4 - lv[i]]);
     let r = Math.random() * w.reduce((s, x) => s + x[1], 0);
     for (const [i, x] of w) { r -= x; if (r <= 0) { picks.push(i); break; } }
   }
   let n = 0, pts = 0; const missed = [];
   const ask = () => {
     if (n >= picks.length) {
-      finish("jurado", pts, missed.length ? `<div class="callout warn small" style="text-align:left"><b class="t">Repasa estas</b>${missed.map(i => "· " + QA[i][0]).join("<br>")}</div>` : `<p>Respondiste todas con seguridad.</p>`, { max: 18, review: ["#jurado", "Ver todas las respuestas modelo"] });
-      return;
+      return finish("jurado", pts, missed.length ? `<div class="callout warn small" style="text-align:left"><b class="t">Repasa estas</b>${missed.map(i => "· " + QA[i][0]).join("<br>")}</div>` : `<p>Respondiste todas con seguridad. 👏</p>`, { max: 18, review: ["#jurado", "Ver todas las respuestas modelo"] });
     }
     const i = picks[n]; let left = 60, shown = false;
-    el.innerHTML = `<div class="stack"><span class="eyebrow">Pregunta ${n + 1} de 6</span><h2 class="g-q">${QA[i][0]}</h2>
-      <div class="timer"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="tbg"/><circle cx="60" cy="60" r="52" class="tfg" id="tfg" stroke-dasharray="326.7" stroke-dashoffset="0"/></svg><b id="tsec">60</b></div>
-      <p class="muted small" style="text-align:center">Responde en voz alta, como frente al jurado.</p>
-      <button class="btn primary big" id="jshow">Ver respuesta modelo</button><div id="jans" class="stack"></div></div>`;
+    const phases = p => `<div class="phases">${["Responde en voz alta", "Compara", "Califícate"].map((t, k) => `<span class="${k === p ? "on" : k < p ? "done" : ""}">${k < p ? "✓" : k + 1}. ${t}</span>`).join("")}</div>`;
+    el.innerHTML = `<div class="stack">${progress(n, 6, `Pregunta ${n + 1} de 6`)}<div id="jph">${phases(0)}</div>
+      <div class="q-card"><span class="eyebrow">El jurado pregunta</span><h2 class="g-q">${QA[i][0]}</h2></div>
+      <div id="jtimer"><div class="timer"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="tbg"/><circle cx="60" cy="60" r="52" class="tfg" id="tfg" stroke-dasharray="326.7" stroke-dashoffset="0"/></svg><b id="tsec">60</b></div>
+      <button class="btn primary big" id="jshow">Ya respondí · ver respuesta modelo</button></div><div id="jans" class="stack"></div></div>`;
+    fixNb(el);
     const reveal = timeout => {
       if (shown) return; shown = true; clearTimers();
-      $("#jshow").remove();
-      $("#jans").innerHTML = `${timeout ? '<p class="g-bad">⏱ ¡Se acabó el tiempo!</p>' : ""}<div class="callout"><b class="t">Respuesta corta</b>${QA[i][1]}</div><div class="callout warn small"><b class="t">Si profundizan</b>${QA[i][2]}</div>
-        ${hard ? `<div class="hard-q"><b>El jurado insiste:</b> “${FOLLOW[i]}”<span class="small">Responde también esta en voz alta.</span></div>` : ""}
-        <p style="text-align:center"><b>¿Cómo te fue?</b></p><div class="grade"><button data-g="1">😕<span>No supe</span></button><button data-g="2">🙂<span>Más o menos</span></button><button data-g="3">😎<span>La clavé</span></button></div>`;
+      $("#jtimer").innerHTML = timeout ? '<p class="g-bad" style="text-align:center">⏱ Se acabó el tiempo. Compara igual:</p>' : "";
+      $("#jph").innerHTML = phases(1);
+      $("#jans").innerHTML = `<div class="callout"><b class="t">✅ Respuesta corta</b>${QA[i][1]}</div><div class="callout warn small"><b class="t">Si profundizan</b>${QA[i][2]}</div>
+        ${hard ? `<div class="hard-q"><b>🧑‍⚖️ El jurado insiste:</b> “${FOLLOW[i]}”<span class="small">Respóndela también en voz alta antes de calificarte.</span></div>` : ""}
+        <div class="q-card stack" style="gap:10px"><b style="text-align:center">¿Qué tan bien respondiste?</b><div class="grade"><button data-g="1">😕<span>No supe</span><small>0 pts</small></button><button data-g="2">🙂<span>Más o menos</span><small>1 pt</small></button><button data-g="3">😎<span>La clavé</span><small>3 pts</small></button></div></div>`;
       fixNb($("#jans"));
       $$(".grade button", el).forEach(b => b.addEventListener("click", () => {
+        $("#jph").innerHTML = phases(2);
         const g = +b.dataset.g; lv[i] = g; store.set("jlv", lv);
-        pts += g === 3 ? 3 : g === 2 ? 1 : 0; if (g === 1) missed.push(i); setScore(pts); n++; ask();
+        pts += g === 3 ? 3 : g === 2 ? 1 : 0; if (g === 1) missed.push(i); setScore(pts); n++;
+        $("#game").scrollTop = 0; ask();
       }));
     };
     $("#jshow").addEventListener("click", () => reveal(false));
     every(() => {
-      left--; $("#tsec").textContent = left; $("#tfg").setAttribute("stroke-dashoffset", String(326.7 * (1 - left / 60)));
+      left--; const t = $("#tsec"); if (!t) return;
+      t.textContent = left; $("#tfg").setAttribute("stroke-dashoffset", String(326.7 * (1 - left / 60)));
       if (left <= 10) $(".timer", el).classList.add("hot");
       if (left <= 0) reveal(true);
     }, 1000);
-    fixNb(el);
   };
   ask();
 }
@@ -1495,41 +1567,52 @@ const CLUES = {
   "0336": ["Al 20 % germiné 84 % y tuve 4.73 raíces.", "Al 5 % mi planta midió 22.86 cm.", "Vengo de León.", "Me llaman Agapeño."],
   "0361": ["Al 20 % mi ITEG fue 40.27 %, tercero de los 12.", "Al 5 % germiné 88 % y mi cobertura fue de 135.24 cm².", "Vengo de Boaco.", "Me llaman Sangre de Toro."]
 };
-const SHORTN = { "INTA Nutremas": "Nutremas", "Nutrinta Amarillo": "Nutrinta Am.", "INTA Sequía Amarillo": "INTA Sequía Am." };
+const SHORTN = { "INTA Nutremas": "Nutremas", "Nutrinta Amarillo": "Nutrinta Amarillo", "INTA Sequía Amarillo": "INTA Sequía Amarillo" };
 function startQuien(el) {
-  chooseMode(el, "quien", duel => runQuien(el, duel), `<p class="muted">Recibes pistas una por una. Adivina con menos pistas para ganar más puntos: 4 con la primera, 1 con la última. Cada error te cuesta una pista.</p>`);
+  intro(el, "quien", [
+    "Uno de los 12 genotipos está escondido. Te va dando <b>pistas</b> sobre sus datos.",
+    "Cuando creas saber cuál es, tócalo en la lista de abajo.",
+    "Mientras menos pistas uses, más puntos ganas: <b>4, 3, 2 o 1</b>.",
+    "Si te equivocas, se revela otra pista automáticamente."
+  ], () => runQuien(el));
 }
-function runQuien(el, duel) {
-  const rounds = duel ? 8 : 6, order = shuffle(ALL).slice(0, rounds);
-  let r = 0; const sc = [0, 0];
+function runQuien(el) {
+  const rounds = 6, order = shuffle(ALL).slice(0, rounds);
+  let r = 0, total = 0;
   const next = () => {
-    if (r >= rounds) {
-      if (duel) finish("quien", sc[0] + sc[1], duelResult(sc), { duel: true });
-      else finish("quien", sc[0], "", { max: 24, review: ["#m6", "Repasar los genotipos"] });
-      return;
-    }
-    const g = order[r], p = duel ? r % 2 : 0; let k = 1, wrong = 0, done = false;
-    el.innerHTML = `<div class="stack">${duel ? turnBadge(p) : ""}<span class="eyebrow">Ronda ${r + 1} de ${rounds} · ¿Quién soy?</span>
-      <ol class="clues" id="clues"></ol><button class="btn" id="qmore">Otra pista (−1 punto)</button>
-      <div class="pick" id="pick">${shuffle(ALL).map(x => `<button data-g="${esc(x)}"><span class="dot ${isMej(x) ? "mej" : "nat"}"></span>${esc(SHORTN[x] || x)}</button>`).join("")}</div><div id="qfb"></div></div>`;
-    const drawClues = () => { $("#clues").innerHTML = CLUES[g].slice(0, k).map((c, j) => `<li class="${j === k - 1 ? "new" : ""}">${c}</li>`).join(""); fixNb($("#clues")); $("#qmore").disabled = k >= 4; };
-    const end = ok => {
-      done = true; const pts = ok ? Math.max(1, 5 - k) : 0; sc[p] += pts;
-      setScore(sc[0], duel ? `${PLAYERS[0]} ${sc[0]} · ${sc[1]} ${PLAYERS[1]}` : null);
-      $$("#pick button").forEach(b => { b.disabled = true; if (b.dataset.g === g) b.classList.add("right"); });
-      k = 4; drawClues();
-      $("#qfb").innerHTML = `<div class="callout ${ok ? "" : "warn"}"><b class="t">${ok ? `¡Correcto! +${pts}` : "Era…"}</b>${esc(label(g))}${isMej(g) ? " · variedad mejorada del INTA" : " · " + D.info[g].depto}</div><button class="btn primary big" id="qnext2">${r + 1 >= rounds ? "Ver resultado" : "Siguiente"}</button>`;
-      if (ok) pop($("#qfb .callout"));
-      $("#qnext2").addEventListener("click", () => { r++; next(); });
+    if (r >= rounds) return finish("quien", total, "", { max: 24, review: ["#m6", "Repasar los genotipos"] });
+    const g = order[r]; let k = 1, wrong = 0, done = false;
+    const opt = x => `<button data-g="${esc(x)}">${esc(SHORTN[x] || x)}</button>`;
+    el.innerHTML = `<div class="stack">${progress(r, rounds, `Ronda ${r + 1} de ${rounds}`)}
+      <div class="riddle"><span class="r-ic" aria-hidden="true">🌽</span><div><b>¿Qué genotipo soy?</b><span>Lee las pistas y elige tu respuesta abajo.</span></div><span class="worth" id="qworth"></span></div>
+      <div class="clues" id="clues"></div>
+      <button class="btn ghost" id="qmore">🔍 Pedir otra pista <span class="small muted">(vale 1 punto menos)</span></button>
+      <div class="pick-wrap"><span class="eyebrow">Tu respuesta · toca un genotipo</span>
+        <span class="pick-g"><span class="dot mej"></span>Variedades mejoradas (INTA)</span><div class="pick" id="pick1">${D.mej.map(opt).join("")}</div>
+        <span class="pick-g"><span class="dot nat"></span>Poblaciones nativas (BNG)</span><div class="pick" id="pick2">${D.nat.map(opt).join("")}</div></div>
+      <p class="small g-bad" id="qmsg" aria-live="polite"></p></div>`;
+    const draw = () => {
+      $("#clues").innerHTML = CLUES[g].slice(0, k).map((c, j) => `<div class="clue ${j === k - 1 ? "new" : ""}"><span class="clue-n">Pista ${j + 1}</span><p>${c}</p></div>`).join("");
+      fixNb($("#clues"));
+      $("#qmore").hidden = k >= 4 || done;
+      $("#qworth").innerHTML = done ? "" : `Vale<b>${Math.max(1, 5 - k)}</b>pts`;
     };
-    drawClues();
-    $("#qmore").addEventListener("click", () => { if (k < 4) { k++; drawClues(); } });
-    $("#pick").addEventListener("click", e => {
+    const end = ok => {
+      done = true; const pts = ok ? Math.max(1, 5 - k) : 0; total += pts; setScore(total);
+      $$(".pick button", el).forEach(b => { b.disabled = true; if (b.dataset.g === g) b.classList.add("right"); });
+      k = 4; draw(); $("#qmsg").textContent = "";
+      feedback({ ok, title: ok ? `¡Correcto! +${pts} punto${pts === 1 ? "" : "s"}` : "Esta vez no", text: `Era <b>${esc(label(g))}</b>${isMej(g) ? ", variedad mejorada del INTA" : ", de " + D.info[g].depto}.`, btn: r + 1 >= rounds ? "Ver resultado" : "Siguiente ronda", onNext: () => { r++; $("#game").scrollTop = 0; next(); } });
+    };
+    draw();
+    $("#qmore").addEventListener("click", () => { if (k < 4) { k++; draw(); } });
+    el.querySelectorAll(".pick").forEach(p => p.addEventListener("click", e => {
       const b = e.target.closest("button"); if (!b || b.disabled || done) return;
       if (b.dataset.g === g) return end(true);
-      b.disabled = true; b.classList.add("wrong"); wrong++;
-      if (k < 4) { k++; drawClues(); } else if (wrong >= 3) end(false);
-    });
+      b.disabled = true; b.classList.add("wrong"); b.innerHTML = "✕ " + b.innerHTML; wrong++;
+      if (wrong >= 3) return end(false);
+      if (k < 4) { k++; draw(); $("#qmsg").textContent = `No es ${b.dataset.g}. Te damos otra pista arriba.`; $("#game").scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); }
+      else $("#qmsg").textContent = `No es ${b.dataset.g}. Te ${3 - wrong === 1 ? "queda 1 intento" : "quedan " + (3 - wrong) + " intentos"}.`;
+    }));
   };
   next();
 }
@@ -1550,94 +1633,107 @@ function makePair(level) {
   return makePair(0);
 }
 function startMayor(el) {
-  chooseMode(el, "mayor", duel => runMayor(el, duel), `<p class="muted">Dos genotipos, un dato real de la tesis. Toca el que tuvo el valor más alto (o más bajo, lee bien). Las comparaciones se vuelven más finas a medida que aciertas.</p><p class="small muted">Tienes 3 vidas.</p>`);
+  intro(el, "mayor", [
+    "Verás dos genotipos y un dato real de los cuadros de la tesis.",
+    "Lee bien si se pregunta por el valor <b>MAYOR</b> o el <b>MENOR</b>.",
+    "Toca el genotipo correcto. Cada acierto suma 1 punto y alarga tu racha 🔥.",
+    "Tienes 3 vidas ❤️. Las comparaciones se vuelven más finas a medida que aciertas."
+  ], () => runMayor(el));
 }
-function runMayor(el, duel) {
-  let lives = 3, n = 0, streak = 0; const sc = [0, 0]; const total = 16;
+function runMayor(el) {
+  let lives = 3, n = 0, ok = 0, streak = 0, bestStreak = 0;
   const next = () => {
-    if ((!duel && lives <= 0) || (duel && n >= total)) {
-      if (duel) finish("mayor", sc[0] + sc[1], duelResult(sc), { duel: true });
-      else finish("mayor", sc[0], `<p>Mejor racha de la partida: <b>${G.bestStreak || 0}</b></p>`, { review: ["#datos", "Repasar los datos"] });
-      return;
-    }
-    const p = duel ? n % 2 : 0, ok = duel ? sc[p] : sc[0];
-    const level = Math.min(2, Math.floor((duel ? Math.floor(n / 2) : ok) / 4));
-    const q = makePair(level), c = q.v.conc[q.i];
-    const hearts = duel ? "" : `<span class="hearts">${"❤️".repeat(lives)}${"🤍".repeat(3 - lives)}</span>`;
-    el.innerHTML = `<div class="stack">${duel ? turnBadge(p) : `<div class="row" style="justify-content:space-between">${hearts}<span class="pill">Racha ${streak}</span></div>`}
-      <span class="eyebrow">${q.v.src} · ${["Fácil", "Media", "Difícil"][level]}</span>
-      <h2 class="g-q">¿Quién tuvo <span class="${q.high ? "hi-up" : "hi-down"}">${q.high ? "MAYOR" : "MENOR"}</span> ${q.v.name.toLowerCase()} al ${c} % de PEG?</h2>
-      <div class="vs">${[q.a, q.b].map(g => `<button data-g="${esc(g)}"><span class="row" style="gap:6px;justify-content:center"><span class="dot ${isMej(g) ? "mej" : "nat"}"></span>${isMej(g) ? "Mejorada" : "Nativa · " + D.info[g].depto}</span><b>${esc(g)}</b><span class="val"></span><i class="bar"></i></button>`).join('<span class="or">o</span>')}</div><div id="mfb"></div></div>`;
+    if (lives <= 0) return finish("mayor", ok, `<p>Mejor racha: <b>🔥 ${bestStreak}</b></p>`, { review: ["#datos", "Repasar los datos"] });
+    const level = Math.min(2, Math.floor(ok / 4)), q = makePair(level), c = q.v.conc[q.i];
+    const hearts = `<span class="hearts" aria-label="${lives} vidas">${"❤️".repeat(lives)}${"🤍".repeat(3 - lives)}</span>`;
+    el.innerHTML = `<div class="stack"><div class="g-head"><div class="row" style="justify-content:space-between">${hearts}<span class="g-step">🔥 Racha ${streak} · ${["Fácil", "Media", "Difícil"][level]}</span></div></div>
+      <div class="q-card"><span class="eyebrow">Pregunta ${n + 1}</span><h2 class="g-q">¿Quién tuvo <span class="${q.high ? "hi-up" : "hi-down"}">${q.high ? "MAYOR ▲" : "MENOR ▼"}</span> ${q.v.name.toLowerCase()}?</h2>
+      <div class="row" style="gap:6px"><span class="pill">${q.v.src}</span><span class="pill">PEG ${c} %</span></div></div>
+      <span class="eyebrow">Toca una opción</span>
+      <div class="vs">${[q.a, q.b].map(g => `<button data-g="${esc(g)}"><span class="row" style="gap:6px;justify-content:center"><span class="dot ${isMej(g) ? "mej" : "nat"}"></span>${isMej(g) ? "Mejorada" : "Nativa · " + D.info[g].depto}</span><b>${esc(g)}</b><span class="val"></span><i class="bar"></i></button>`).join('<span class="or">o</span>')}</div></div>`;
     fixNb(el);
     $(".vs", el).addEventListener("click", e => {
       const b = e.target.closest("button"); if (!b || b.disabled) return;
-      const win = q.high ? (q.va > q.vb ? q.a : q.b) : (q.va < q.vb ? q.a : q.b), right = b.dataset.g === win;
-      const mx = Math.max(q.va, q.vb);
-      $$(".vs button", el).forEach(x => { x.disabled = true; const v = x.dataset.g === q.a ? q.va : q.vb; $(".val", x).textContent = fmt(v) + " " + q.v.unit; $(".bar", x).style.width = (v / mx * 100) + "%"; if (x.dataset.g === win) x.classList.add("right"); });
-      if (right) { sc[p]++; streak++; G.bestStreak = Math.max(G.bestStreak || 0, streak); pop(b); } else { b.classList.add("wrong"); lives--; streak = 0; }
-      setScore(sc[0], duel ? `${PLAYERS[0]} ${sc[0]} · ${sc[1]} ${PLAYERS[1]}` : sc[0] + " aciertos");
+      const win = q.high ? (q.va > q.vb ? q.a : q.b) : (q.va < q.vb ? q.a : q.b), lose = win === q.a ? q.b : q.a, right = b.dataset.g === win;
+      const mx = Math.max(q.va, q.vb), val = g => g === q.a ? q.va : q.vb;
+      $$(".vs button", el).forEach(x => { x.disabled = true; const v = val(x.dataset.g); $(".val", x).textContent = fmt(v) + " " + q.v.unit; $(".bar", x).style.width = (v / mx * 100) + "%"; if (x.dataset.g === win) x.classList.add("right"); });
       n++;
-      $("#mfb").innerHTML = `<p class="${right ? "g-ok" : "g-bad"}" style="text-align:center">${right ? "¡Correcto!" : "¡Uy! Era " + esc(win)}</p><button class="btn primary big" id="mnext">Siguiente</button>`;
-      $("#mnext").addEventListener("click", next);
+      if (right) { ok++; streak++; bestStreak = Math.max(bestStreak, streak); setScore(ok); pop(b); } else { b.classList.add("wrong"); lives--; streak = 0; }
+      feedback({ ok: right, title: right ? (streak >= 3 ? `¡Correcto! 🔥 ${streak} seguidas` : "¡Correcto!") : (lives > 0 ? `Incorrecto · te quedan ${lives} vida${lives === 1 ? "" : "s"}` : "Incorrecto · sin vidas"),
+        text: `${esc(win)}: <b>${fmt(val(win))} ${q.v.unit}</b> · ${esc(lose)}: ${fmt(val(lose))} ${q.v.unit} (${q.v.src}, PEG ${c} %).`,
+        btn: lives > 0 ? "Siguiente" : "Ver resultado", onNext: () => { $("#game").scrollTop = 0; next(); } });
     });
   };
-  G.bestStreak = 0; next();
+  next();
 }
 
 /* ---------- 4. Ordena la tesis ---------- */
 const PUZZLES = [
-  { t: "Ordena el protocolo del ensayo", items: ["Prueba de germinación con Vitavax 34 SC", "Desinfección del área con formalina al 5 %", "Semilla en etanol 70 % + Phyton 24 SC 0.3 % por 5 min", "Tres enjuagues con agua estéril", "Montaje con 280 ml de solución de PEG 6 000", "Conteos diarios durante 7 días y mediciones"], why: "Primero se verifica la calidad de la semilla, luego se desinfecta el área y la semilla, se monta el ensayo y se registra." },
-  { t: "Ordena el análisis estadístico", items: ["Ajustar el modelo lineal mixto (con varIdent)", "Revisar supuestos: residuos y gráficos Q-Q", "ANDEVA con α = 0.05", "Medias marginales (emmeans) y prueba de Tukey"], why: "Sin un modelo que cumpla los supuestos, el ANDEVA y las comparaciones de medias no son válidos." },
-  { t: "Ordena el ITEG al 20 % (de mayor a menor)", items: ["NB-6", "0077", "0361", "0232", "Nutrinta Amarillo"], why: "NB-6 45.15 % · 0077 43.72 % · 0361 40.27 % · 0232 36.78 % · Nutrinta Amarillo 28.57 % (Cuadro 4)." },
-  { t: "Arma la cadena del objetivo 2", items: ["Objetivo: identificar concentraciones críticas para la selección", "Resultado: a 5–10 % hay diferencias y las plántulas siguen creciendo", "Conclusión: 5 % y 10 % son recomendables", "Recomendación: usar PEG 6 000 entre 5 y 10 %"], why: "Objetivo → resultado → conclusión → recomendación: así se demuestra que el objetivo se cumplió." },
-  { t: "Ordena el daño de la sequía en floración", items: ["Déficit hídrico alrededor de la antesis", "Se inhibe el desarrollo floral y se retrasan los estigmas", "Aborto de óvulos y fallas de polinización", "Menos granos por mazorca y menor peso de grano"], why: "Es la cadena causal que justifica el problema de la tesis (Sánchez et al., 2020)." },
-  { t: "Ordena la longitud de raíz al 20 % (de mayor a menor)", items: ["0232", "0097", "0336", "0361", "INTA Sequía Amarillo"], why: "0232 17.60 cm · 0097 17.48 cm · 0336 15.07 cm · 0361 14.66 cm · INTA Sequía Amarillo 6.26 cm (Cuadro 7)." }
+  { t: "Ordena el protocolo del ensayo", hint: "Del primer al último paso", items: ["Prueba de germinación con Vitavax 34 SC", "Desinfección del área con formalina al 5 %", "Semilla en etanol 70 % + Phyton 24 SC 0.3 % por 5 min", "Tres enjuagues con agua estéril", "Montaje con 280 ml de solución de PEG 6 000", "Conteos diarios durante 7 días y mediciones"], why: "Primero se verifica la calidad de la semilla, luego se desinfecta el área y la semilla, se monta el ensayo y se registra." },
+  { t: "Ordena el análisis estadístico", hint: "Del primer al último paso", items: ["Ajustar el modelo lineal mixto (con varIdent)", "Revisar supuestos: residuos y gráficos Q-Q", "ANDEVA con α = 0.05", "Medias marginales (emmeans) y prueba de Tukey"], why: "Sin un modelo que cumpla los supuestos, el ANDEVA y las comparaciones de medias no son válidos." },
+  { t: "Ordena el ITEG al 20 % de PEG", hint: "Del más alto al más bajo", items: ["NB-6", "0077", "0361", "0232", "Nutrinta Amarillo"], why: "NB-6 45.15 % · 0077 43.72 % · 0361 40.27 % · 0232 36.78 % · Nutrinta Amarillo 28.57 % (Cuadro 4)." },
+  { t: "Arma la cadena del objetivo 2", hint: "Del objetivo a la recomendación", items: ["Objetivo: identificar concentraciones críticas para la selección", "Resultado: a 5–10 % hay diferencias y las plántulas siguen creciendo", "Conclusión: 5 % y 10 % son recomendables", "Recomendación: usar PEG 6 000 entre 5 y 10 %"], why: "Objetivo → resultado → conclusión → recomendación: así se demuestra que el objetivo se cumplió." },
+  { t: "Ordena el daño de la sequía en floración", hint: "De la causa a la consecuencia", items: ["Déficit hídrico alrededor de la antesis", "Se inhibe el desarrollo floral y se retrasan los estigmas", "Aborto de óvulos y fallas de polinización", "Menos granos por mazorca y menor peso de grano"], why: "Es la cadena causal que justifica el problema de la tesis (Sánchez et al., 2020)." },
+  { t: "Ordena la longitud de raíz al 20 % de PEG", hint: "De la más larga a la más corta", items: ["0232", "0097", "0336", "0361", "INTA Sequía Amarillo"], why: "0232 17.60 cm · 0097 17.48 cm · 0336 15.07 cm · 0361 14.66 cm · INTA Sequía Amarillo 6.26 cm (Cuadro 7)." }
 ];
 function startOrdena(el) {
+  intro(el, "ordena", [
+    "Verás un reto y unas piezas desordenadas.",
+    "Toca las piezas <b>en el orden correcto</b>: la primera que toques va al puesto 1.",
+    "¿Te equivocaste al colocar una? Tócala en tu lista para devolverla.",
+    "Cuando estén todas, toca <b>Comprobar</b>. 3 puntos al primer intento, 1 al segundo."
+  ], () => runOrdena(el));
+}
+function runOrdena(el) {
   const set = shuffle(PUZZLES).slice(0, 4); let pi = 0, pts = 0;
-  el.innerHTML = `<div class="g-intro stack"><span class="g-big" aria-hidden="true">🧩</span><h2>Ordena la tesis</h2><p class="muted">Toca las piezas en el orden correcto. Para devolver una pieza, tócala otra vez. 3 puntos al primer intento, 1 al segundo.</p><button class="btn primary big" id="ostart">Empezar</button></div>`;
-  $("#ostart").addEventListener("click", () => play());
   const play = () => {
     if (pi >= set.length) return finish("ordena", pts, "", { max: 12, review: ["#m3", "Repasar el método"] });
-    const P = set[pi]; let placed = [], tries = 0;
+    const P = set[pi]; let placed = [], tries = 0, locked = false;
     const pool = shuffle(P.items.map((_, i) => i));
-    const draw = () => {
-      el.innerHTML = `<div class="stack"><span class="eyebrow">Reto ${pi + 1} de ${set.length}</span><h2 class="g-q">${P.t}</h2>
-        <ol class="slots">${P.items.map((_, j) => placed[j] != null ? `<li><button data-back="${j}">${P.items[placed[j]]}</button></li>` : `<li class="empty"><span>${j + 1}</span></li>`).join("")}</ol>
-        <div class="pool">${pool.filter(i => !placed.includes(i)).map(i => `<button data-i="${i}">${P.items[i]}</button>`).join("")}</div>
-        ${placed.length === P.items.length ? '<button class="btn primary big" id="ocheck">Comprobar</button>' : ""}<div id="ofb"></div></div>`;
+    const draw = (marks = null) => {
+      const left = pool.filter(i => !placed.includes(i));
+      el.innerHTML = `<div class="stack">${progress(pi, set.length, `Reto ${pi + 1} de ${set.length}`)}
+        <div class="q-card"><span class="eyebrow">${P.hint}</span><h2 class="g-q">${P.t}</h2></div>
+        <span class="eyebrow">Tu orden ${placed.length ? `· ${placed.length} de ${P.items.length}` : ""}</span>
+        <ol class="slots">${P.items.map((_, j) => placed[j] != null
+          ? `<li class="${marks ? (marks[j] ? "right" : "wrong") : ""}"><button data-back="${j}" ${locked ? "disabled" : ""}><span class="n">${j + 1}</span><span class="tx">${P.items[placed[j]]}</span>${locked ? (marks[j] ? '<span class="m">✓</span>' : '<span class="m">✕</span>') : '<span class="m x" aria-label="Quitar">↩</span>'}</button></li>`
+          : `<li class="empty"><span class="n">${j + 1}</span><span>${j === placed.length ? "Toca una pieza de abajo" : ""}</span></li>`).join("")}</ol>
+        ${left.length ? `<span class="eyebrow">Piezas · toca la que va en el puesto ${placed.length + 1}</span><div class="pool">${left.map(i => `<button data-i="${i}">${P.items[i]}</button>`).join("")}</div>` : ""}
+        ${placed.length === P.items.length && !locked ? '<button class="btn primary big" id="ocheck">Comprobar orden</button>' : ""}</div>`;
       fixNb(el);
       $$(".pool button", el).forEach(b => b.addEventListener("click", () => { placed.push(+b.dataset.i); draw(); }));
-      $$(".slots button", el).forEach(b => b.addEventListener("click", () => { placed.splice(+b.dataset.back, 1); draw(); }));
+      $$(".slots button[data-back]", el).forEach(b => b.addEventListener("click", () => { if (!locked) { placed.splice(+b.dataset.back, 1); draw(); } }));
       const ck = $("#ocheck"); if (ck) ck.addEventListener("click", check);
     };
     const check = () => {
-      tries++; const ok = placed.every((v, j) => v === j);
-      $$(".slots li", el).forEach((li, j) => li.classList.add(placed[j] === j ? "right" : "wrong"));
-      $("#ocheck").remove();
+      tries++; const marks = placed.map((v, j) => v === j), ok = marks.every(Boolean);
+      locked = true; draw(marks);
       if (ok || tries >= 2) {
         const got = ok ? (tries === 1 ? 3 : 1) : 0; pts += got; setScore(pts);
-        if (!ok) $(".slots", el).insertAdjacentHTML("afterend", `<div class="callout small"><b class="t">Orden correcto</b>${P.items.map((x, j) => (j + 1) + ". " + x).join("<br>")}</div>`);
-        $("#ofb").innerHTML = `<div class="callout ${ok ? "" : "warn"} small"><b class="t">${ok ? "¡Perfecto! +" + got : "Sin puntos esta vez"}</b>${P.why}</div><button class="btn primary big" id="onext">${pi + 1 >= set.length ? "Ver resultado" : "Siguiente reto"}</button>`;
-        fixNb($("#ofb")); if (ok) pop($("#ofb .callout"));
-        $("#onext").addEventListener("click", () => { pi++; play(); });
+        feedback({ ok, title: ok ? `¡Perfecto! +${got} punto${got === 1 ? "" : "s"}` : "Sin puntos esta vez",
+          text: (ok ? "" : "<b>Orden correcto:</b> " + P.items.map((x, j) => (j + 1) + ". " + x).join(" · ") + "<br>") + P.why,
+          btn: pi + 1 >= set.length ? "Ver resultado" : "Siguiente reto", onNext: () => { pi++; $("#game").scrollTop = 0; play(); } });
       } else {
-        $("#ofb").innerHTML = `<p class="g-bad" style="text-align:center">Hay piezas fuera de lugar (en rojo). Te queda un intento.</p><button class="btn primary big" id="oretry">Reintentar</button>`;
-        $("#oretry").addEventListener("click", () => { placed = placed.filter((v, j) => v === j && placed.slice(0, j).every((w, m) => w === m)); draw(); });
+        feedback({ ok: false, title: `${marks.filter(Boolean).length} de ${marks.length} en su lugar`, text: "Las piezas en rojo están fuera de lugar. Se quedan las correctas del inicio; vuelve a colocar el resto. Te queda un intento.", btn: "Reintentar",
+          onNext: () => { let keep = 0; while (keep < placed.length && placed[keep] === keep) keep++; placed = placed.slice(0, keep); locked = false; draw(); } });
       }
     };
     draw();
   };
+  play();
 }
 
 /* ---------- 5 y 6. Tarjetas y quiz dentro del modo juego ---------- */
-function startFlash(el) { el.appendChild($("#pr-flash")); fi = 0; showCard(); touchStreak(); }
-function startQuizGame(el) { el.appendChild($("#pr-quiz")); $("#pr-quiz").hidden = false; startQuiz(); }
+function startFlash(el) {
+  el.innerHTML = `<div class="callout small">Toca la tarjeta para voltearla. Marca <b>“La sé”</b> si la respondiste bien o <b>“Repasar”</b> para verla otra vez.</div>`;
+  el.appendChild($("#pr-flash")); fi = 0; showCard(); touchStreak();
+}
+function startQuizGame(el) { el.appendChild($("#pr-quiz")); $("#pr-quiz").hidden = false; G.playing = true; startQuiz(); }
 
 function initGames() {
   renderHub();
   $("#g-grid").addEventListener("click", e => { const b = e.target.closest("[data-game]"); if (b) openGame(b.dataset.game); });
-  $("#g-close").addEventListener("click", closeGame);
+  $("#g-close").addEventListener("click", askExit);
   $("#game").addEventListener("click", e => { if (e.target.closest("[data-close]")) closeGame(); });
 }
 document.addEventListener("click", e => { const a = e.target.closest("[data-open]"); if (a) G.pending = a.dataset.open; });
